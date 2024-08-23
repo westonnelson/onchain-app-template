@@ -1,38 +1,38 @@
-'use client';
+"use client";
 import {
   Transaction,
   TransactionButton,
   TransactionStatus,
   TransactionStatusAction,
   TransactionStatusLabel,
-} from '@coinbase/onchainkit/transaction';
+} from "@coinbase/onchainkit/transaction";
 import type {
   TransactionError,
   TransactionResponse,
-} from '@coinbase/onchainkit/transaction';
-import type { ContractFunctionParameters } from 'viem';
+} from "@coinbase/onchainkit/transaction";
+import type { ContractFunctionParameters } from "viem";
 import {
-  BASE_SEPOLIA_CHAIN_ID,
+  BASE_ChainID,
   clickContractABI,
   clickContractAddress,
-} from '../constants';
+} from "../constants";
 
 export default function TransactionWrapper() {
   const contracts = [
     {
       address: clickContractAddress,
       abi: clickContractABI,
-      functionName: 'click',
+      functionName: "click",
       args: [],
     },
   ] as unknown as ContractFunctionParameters[];
 
   const handleError = (err: TransactionError) => {
-    console.error('Transaction error:', err);
+    console.error("Transaction error:", err);
   };
 
   const handleSuccess = (response: TransactionResponse) => {
-    console.log('Transaction successful', response);
+    console.log("Transaction successful", response);
   };
 
   return (
@@ -40,7 +40,7 @@ export default function TransactionWrapper() {
       <Transaction
         contracts={contracts}
         className="w-[450px]"
-        chainId={BASE_SEPOLIA_CHAIN_ID}
+        chainId={BASE_ChainID}
         onError={handleError}
         onSuccess={handleSuccess}
       >
